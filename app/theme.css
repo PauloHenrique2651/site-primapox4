@@ -1,0 +1,101 @@
+/* Proposta 04 — inspirada na Prodec: tradição, confiança e apresentação técnica.
+   Marinho dominante, serifa nos títulos, filetes vermelhos discretos. */
+:root {
+  --navy-deep: #0b1650;
+  --mist: #f4f6fb;
+  --navy: #0b1a4a;
+  --ink: #1d2540;
+  --muted: #4f5875;
+  --steel: #e7eaf0;
+  --brand-blue: #002398;
+  --line: rgba(11, 26, 74, .16);
+
+  --navy-2: #13256a;
+  --blue: var(--brand-blue);
+  --red: #e00000;
+  --red-dark: #b80000;
+  --paper: #fff;
+  --focus: var(--brand-blue);
+
+  --display: var(--font-display), Georgia, serif;
+  --body: var(--font-body), "Segoe UI", Arial, sans-serif;
+  --mono: var(--font-body), "Segoe UI", Arial, sans-serif;
+
+  --shell: min(90vw, 1320px);
+  --type-hero: clamp(2.5rem, 4.8vw, 4.4rem);
+  --type-section: clamp(2rem, 3.4vw, 3.1rem);
+  --type-card: clamp(1.4rem, 1.9vw, 1.75rem);
+}
+
+html { font-size: 106.25%; }
+body { background: #fff; color: var(--ink); font-family: var(--body); line-height: 1.6; }
+:focus-visible { outline-color: var(--brand-blue); }
+::selection { background: var(--navy); }
+
+/* Inner pages: serif headings in sentence case, no monospace labels */
+.eyebrow,
+.editorial-grid__index,
+.value-grid span,
+.resin-grid span,
+.process-page__list span,
+.contact-band p,
+.solution-listing span,
+.solution-listing b,
+.application-index article > div:last-child > span,
+.gallery-filters button,
+.contact-page__details > div span,
+.quote-form label > span:first-child,
+.industrial-gallery__item > span,
+.gallery-lightbox__caption span {
+  font-family: var(--body);
+  font-size: .95rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.editorial-grid__lead h2,
+.value-grid h3,
+.resin-grid h3,
+.process-page__list h2,
+.application-index h2,
+.contact-band h2,
+.solution-listing h2,
+.legal-copy h2,
+.process-principle p {
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.08;
+  text-transform: none;
+}
+
+.editorial-grid__copy,
+.value-grid p,
+.resin-grid p,
+.process-page__list p,
+.application-index p,
+.legal-copy p,
+.contact-page__details > p { color: var(--muted); font-size: 1.1rem; }
+
+.content-section { background: #fff; }
+.resin-section { background: var(--steel); }
+.process-principle { background: var(--navy); }
+
+.button { border-radius: 4px !important; font-size: 1rem; font-weight: 600; letter-spacing: 0; text-transform: none; }
+.text-link { font-size: 1rem; font-weight: 600; letter-spacing: 0; text-transform: none; border-bottom-color: var(--red); }
+.text-link--light { border-bottom-color: currentColor; }
+
+.quote-form { border-top-color: var(--navy); }
+.quote-form input, .quote-form select, .quote-form textarea { font-size: 1.05rem; }
+.quote-form__submit p { font-size: .92rem; }
+.gallery-lightbox__caption p { font-size: 1rem; }
+
+/* Palette pass for inner pages */
+.content-section { background: var(--mist); }
+.value-section { background: var(--navy-deep); }
+.value-grid article { color: #fff; border-color: rgba(255,255,255,.2); }
+.value-grid h3 { color: #fff; }
+.value-grid p, .value-grid span { color: #d6ddf7; }
+.resin-section { background: #fff; }
+.contact-band { background: var(--navy-deep); }
+.process-principle { background: var(--red); }

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      /* Primapox hero loop — prodec. Background only: the website overlays its own headline. */
+      :root { --ground: #0b1a4a; }
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { width: 1920px; height: 1080px; overflow: hidden; background: var(--ground); }
+      #root { position: relative; width: 100%; height: 100%; overflow: hidden; background: var(--ground); }
+      .shot { position: absolute; inset: 0; overflow: hidden; }
+      .frame { position: absolute; inset: 0; overflow: hidden; }
+      .frame img { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="14" data-width="1920" data-height="1080" data-layout-allow-overflow>
+      <div id="prodec-shot-0" class="clip shot" data-start="0" data-duration="14" data-track-index="0" style="z-index:1">
+        <div class="frame" id="prodec-shot-0-frame"><img id="prodec-shot-0-img" src="assets/photo-25.jpg" alt="" /></div>
+      </div>
+      <div id="prodec-shot-1" class="clip shot" data-start="1.2" data-duration="12.8" data-track-index="1" style="z-index:2">
+        <div class="frame" id="prodec-shot-1-frame"><img id="prodec-shot-1-img" src="assets/photo-26.jpg" alt="" /></div>
+      </div>
+      <div id="prodec-shot-2" class="clip shot" data-start="4" data-duration="10" data-track-index="2" style="z-index:3">
+        <div class="frame" id="prodec-shot-2-frame"><img id="prodec-shot-2-img" src="assets/photo-37.jpg" alt="" /></div>
+      </div>
+      <div id="prodec-shot-3" class="clip shot" data-start="6.8" data-duration="7.2" data-track-index="3" style="z-index:4">
+        <div class="frame" id="prodec-shot-3-frame"><img id="prodec-shot-3-img" src="assets/photo-36.jpg" alt="" /></div>
+      </div>
+      <div id="prodec-shot-4" class="clip shot" data-start="9.6" data-duration="4.4" data-track-index="4" style="z-index:5">
+        <div class="frame" id="prodec-shot-4-frame"><img id="prodec-shot-4-img" src="assets/photo-24.jpg" alt="" /></div>
+      </div>
+      <div id="prodec-shot-5" class="clip shot" data-start="12.4" data-duration="1.6" data-track-index="5" style="z-index:6">
+        <div class="frame" id="prodec-shot-5-frame"><img id="prodec-shot-5-img" src="assets/photo-25.jpg" alt="" /></div>
+      </div>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#prodec-shot-0-img", { scale: 1.18, xPercent: 0, yPercent: 0 }, { scale: 1.04, xPercent: 0, yPercent: 0, duration: 6, ease: "sine.out" }, 0);
+      tl.fromTo("#prodec-shot-1-img", { scale: 1.18, xPercent: 1, yPercent: 0 }, { scale: 1.04, xPercent: 0, yPercent: 0, duration: 6, ease: "sine.out" }, 1.2);
+      tl.fromTo("#prodec-shot-1-frame", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 1.2);
+      tl.fromTo("#prodec-shot-2-img", { scale: 1.18, xPercent: -1, yPercent: 0 }, { scale: 1.04, xPercent: 0, yPercent: 0, duration: 6, ease: "sine.out" }, 4);
+      tl.fromTo("#prodec-shot-2-frame", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 4);
+      tl.fromTo("#prodec-shot-3-img", { scale: 1.18, xPercent: 0, yPercent: 1 }, { scale: 1.04, xPercent: 0, yPercent: 0, duration: 6, ease: "sine.out" }, 6.8);
+      tl.fromTo("#prodec-shot-3-frame", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 6.8);
+      tl.fromTo("#prodec-shot-4-img", { scale: 1.18, xPercent: 1, yPercent: 0 }, { scale: 1.04, xPercent: 0, yPercent: 0, duration: 4.4, ease: "sine.out" }, 9.6);
+      tl.fromTo("#prodec-shot-4-frame", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 9.6);
+      tl.fromTo("#prodec-shot-5-img", { scale: 1.18, xPercent: 0, yPercent: 0 }, { scale: 1.18, xPercent: 0, yPercent: 0, duration: 1.6, ease: "none" }, 12.4);
+      tl.fromTo("#prodec-shot-5-frame", { opacity: 0 }, { opacity: 1, duration: 1.6, ease: "sine.inOut" }, 12.4);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
