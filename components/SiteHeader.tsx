@@ -8,13 +8,13 @@ import { useHeaderState } from "@/components/useHeaderState";
 import { company, navigation } from "@/data/site";
 import styles from "./SiteHeader.module.css";
 
-const links = [...navigation, { label: "Galeria", href: "/galeria" }, { label: "Contato", href: "/contato" }];
+const links = navigation;
 
 // Brand band with the enlarged, centred logo scrolls away; the navigation bar below stays pinned
 // and shows a compact logo once the band has left the viewport.
 export function SiteHeader() {
   const pathname = usePathname();
-  const quoteHref = pathname === "/" ? "#orcamento" : "/contato#orcamento";
+  const quoteHref = "/contato";
   const { open, setOpen, close, menu, toggle } = useHeaderState();
   const band = useRef<HTMLDivElement>(null);
   const [pinned, setPinned] = useState(false);
@@ -31,7 +31,7 @@ export function SiteHeader() {
     <>
       <div ref={band} className={styles.band}>
         <div className={`shell ${styles.bandInner}`}>
-          <p className={styles.since}>Pintura industrial desde {company.foundedYear}</p>
+          <a className={styles.since} href="tel:+552134487320">{company.phoneMain}</a>
           <BrandMark className={styles.brand} priority sizes="(max-width: 800px) 220px, 340px" />
           <a className={styles.mail} href={`mailto:${company.email}`}>{company.email}</a>
         </div>
@@ -44,7 +44,7 @@ export function SiteHeader() {
               <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined}>{item.label}</Link>
             ))}
           </nav>
-          <a className={styles.cta} href={quoteHref}>Solicitar orçamento</a>
+          <a className={styles.cta} href={quoteHref}>Fale Conosco</a>
           <button ref={toggle} className={styles.toggle} type="button" aria-expanded={open} aria-controls="menu-mobile" onClick={() => setOpen(!open)}>
             {open ? "Fechar" : "Menu"}
           </button>
@@ -54,7 +54,7 @@ export function SiteHeader() {
             {links.map((item) => (
               <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined} onClick={close}>{item.label}</Link>
             ))}
-            <a className={styles.menuCta} href={quoteHref} onClick={close}>Solicitar orçamento</a>
+            <a className={styles.menuCta} href={quoteHref} onClick={close}>Fale Conosco</a>
           </nav>
         </div>
       </header>

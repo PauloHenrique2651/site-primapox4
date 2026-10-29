@@ -313,3 +313,15 @@
   @keyframes hero-lift { to { translate: 0 -14vh; opacity: .15; } }
 }
 @media (prefers-reduced-motion: reduce) { .panel { animation: none; } }
+
+/* ---------- Legacy-text layout adjustments ---------- */
+.pillars h2 { font-size: clamp(1.4rem, 2.2vw, 1.9rem); }
+.listTitle { margin: 2rem 0 .5rem; color: var(--navy); font: 600 1.4rem/1.2 var(--font-display); }
+.values li p { color: var(--ink) !important; }
+.closingLine { margin: 2.5rem 0 0; color: var(--navy); font: 600 clamp(1.5rem, 2.6vw, 2.2rem)/1.15 var(--font-display); }
+.contactBlock { display: grid; gap: .4rem; margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--line); }
+.contactBlock strong { color: var(--navy); font: 600 1.35rem/1.2 var(--font-display); }
+.contactBlock p { margin: 0 !important; }
+.contactBlock a { color: var(--navy); font-weight: 600; text-decoration: underline; text-decoration-color: var(--red); text-underline-offset: 5px; }
+.quote h2 { color: var(--navy) !important; }
+.sheet td { white-space: normal; }

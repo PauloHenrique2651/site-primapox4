@@ -2,72 +2,57 @@ import Image from "next/image";
 import Link from "next/link";
 import { pageMetadata } from "@/data/seo";
 import { HeroBackgroundVideo } from "@/components/HeroBackgroundVideo";
-import { QuoteForm } from "@/components/QuoteForm";
-import { benefits, company, processSteps } from "@/data/site";
-import { physicalProperties, processDetails, serviceApplications, supportedMetals } from "@/data/services";
-import { legacy } from "@/data/legacy";
-import { faq } from "@/data/faq";
+import { LegacyContactForm } from "@/components/LegacyContactForm";
+import { about, contact, home, services } from "@/data/primapox";
 import styles from "./home.module.css";
 
-export const metadata = pageMetadata("/", "Primapox | Pintura eletrostática a pó no Rio de Janeiro", "Pintura eletrostática a pó para componentes metálicos, com preparação controlada, cobertura uniforme e acabamento de alto padrão no Rio de Janeiro.");
+export const metadata = pageMetadata("/", "Primapox | Pintura eletrostática a pó no Rio de Janeiro", "Executamos pintura eletrostática com tinta em pó, ideais para: esquadrias, batentes, caixilhos, forros, divisórias, fachadas, telhas metálicas, coberturas, estruturas espaciais, etc.");
 
-const pillars = [
-  { title: `Mais de ${company.yearsOfExperience} anos`, copy: `Tradição em pintura industrial desde ${company.foundedOn}.` },
-  { title: "Até 6,5 m", copy: "Capacidade informada para peças de grande comprimento." },
-  { title: "Híbrida e poliéster", copy: "Resinas definidas para uso interior e exterior." },
+// Every visible text comes verbatim from data/primapox.ts (legacy primapox.com).
+const [paintingFirst, paintingSecond] = services.painting.split(" A tinta em pó tem");
+const [beforeFirst] = services.before.split(" A função básica");
+
+const steps = [
+  { number: "01", title: services.pretreatmentTitle, text: services.pretreatment[1], detail: services.pretreatment[3] },
+  { number: "02", title: services.paintingTitle, text: paintingFirst, detail: `A tinta em pó tem${paintingSecond}` },
+  { number: "03", title: services.cureTitle, text: beforeFirst, detail: services.after[0] },
 ];
-
-const values = [
-  ["Preparação", "A qualidade da película depende do que acontece antes da aplicação."],
-  ["Uniformidade", "A deposição eletrostática favorece a cobertura de cantos, bordas e arestas."],
-  ["Critério", "Resina, acabamento e processo precisam conversar com o uso real da peça."],
-];
-
-const faqData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map(({ question, answer }) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })),
-};
 
 export default function HomePage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqData).replace(/</g, "\\u003c") }} />
       <section className={styles.hero} aria-labelledby="titulo-principal">
         <div className={styles.slides}>
           <HeroBackgroundVideo src="/media/hero-prodec.webm" poster="/gallery/25.webp" className={styles.video} buttonClassName={styles.videoToggle} />
         </div>
         <div className={`shell ${styles.heroInner}`}>
           <div className={styles.panel}>
-            <p className={styles.since}>Desde {company.foundedYear} em Vigário Geral, Rio de Janeiro</p>
-            <h1 id="titulo-principal">Pintura eletrostática a pó</h1>
-            <p>Precisão no processo. Proteção em cada camada. Revestimento técnico para componentes metálicos, com cobertura uniforme, alta resistência e acabamento de alto padrão.</p>
+            <p className={styles.since}>{home.servicesTitle}</p>
+            <h1 id="titulo-principal">{services.closing}</h1>
+            <p>{home.servicesText}</p>
             <div className={styles.actions}>
-              <a className={styles.primary} href="#orcamento">Solicitar orçamento</a>
-              <Link className={styles.secondary} href="/processo">Conhecer o processo</Link>
+              <Link className={styles.primary} href="/contato">{home.contactTitle}</Link>
+              <Link className={styles.secondary} href="/servicos">{home.more}</Link>
             </div>
           </div>
         </div>
       </section>
 
-      <section className={styles.pillars} aria-label="Diferenciais">
+      <section className={styles.pillars} aria-label={home.advantagesTitle}>
         <ul className="shell">
-          {pillars.map((pillar) => <li key={pillar.title}><h2>{pillar.title}</h2><p>{pillar.copy}</p></li>)}
+          {home.advantages.map((advantage) => <li key={advantage}><h2>{advantage}</h2></li>)}
         </ul>
       </section>
 
       <section className={styles.tradition} aria-labelledby="tradicao">
         <div className={`shell ${styles.traditionGrid}`}>
-          <h2 id="tradicao">Experiência que ganha camada.</h2>
+          <h2 id="tradicao">{about.title}</h2>
           <div>
-            <p className={styles.lead}>{legacy.reputation}</p>
-            <p>{legacy.servicesIntro} {legacy.protection}</p>
-            <dl className={styles.facts}>
-              <div><dt>Fundação</dt><dd>{company.foundedOn}</dd></div>
-              <div><dt>Localização</dt><dd>Vigário Geral, Rio de Janeiro</dd></div>
-              <div><dt>Capacidade informada</dt><dd>Peças com até 6,5 m de comprimento</dd></div>
-            </dl>
-            <Link className={styles.textLink} href="/empresa">Conhecer a empresa</Link>
+            <p className={styles.lead}>{home.aboutText}</p>
+            <p>{about.paragraphs[1]}</p>
+            <p>{about.paragraphs[2]}</p>
+            <p><strong>{about.paragraphs[3]}</strong></p>
+            <Link className={styles.textLink} href="/empresa">{home.more}</Link>
           </div>
         </div>
       </section>
@@ -75,47 +60,44 @@ export default function HomePage() {
       <section className={styles.process} aria-labelledby="processos">
         <div className="shell">
           <div className={styles.sectionHead}>
-            <h2 id="processos">Processo em quatro etapas</h2>
-            <p>Uma sequência simples de entender e exigente de executar: ler, preparar, aplicar e curar.</p>
+            <h2 id="processos">{services.title}</h2>
+            <p>{services.sloganParagraphs[0]}</p>
           </div>
           <ol className={styles.steps}>
-            {processSteps.map((step, index) => (
+            {steps.map((step) => (
               <li key={step.number}>
                 <span className={styles.stepNumber}>{step.number}</span>
                 <h3>{step.title}</h3>
                 <div>
-                  <p>{step.description}</p>
-                  <p className={styles.detail}>{processDetails[index]}</p>
+                  <p>{step.text}</p>
+                  <p className={styles.detail}>{step.detail}</p>
                 </div>
               </li>
             ))}
           </ol>
-          <p className={styles.result}>{legacy.result}</p>
+          <p className={styles.result}>{services.after[1]}</p>
         </div>
       </section>
 
       <section className={styles.quality} aria-labelledby="qualidade">
         <div className={`shell ${styles.qualityGrid}`}>
           <div>
-            <h2 id="qualidade">Qualidade e tecnologia</h2>
-            <p>A Primapox trabalha com resinas <strong>híbrida</strong>, para peças de uso interior, e <strong>poliéster</strong>, para uso exterior, especialmente em aplicações arquitetônicas.</p>
-            <p>{legacy.noMicrochannels}</p>
-            <p>Metais citados no acervo: {supportedMetals.join(", ").toLowerCase()}.</p>
-            <ul className={styles.values}>
-              {values.map(([title, copy]) => <li key={title}><h3>{title}</h3><p>{copy}</p></li>)}
-            </ul>
+            <h2 id="qualidade">{services.typesTitle}</h2>
+            {services.types.slice(0, 2).map(([name, text]) => <p key={name}><strong>{name}</strong> {text}</p>)}
+            <p><strong>{services.typesNote}</strong></p>
+            <h3 className={styles.listTitle}>{services.benefitsTitle}</h3>
+            <ul className={styles.values}>{services.benefits.map((benefit) => <li key={benefit}><p>{benefit}</p></li>)}</ul>
           </div>
           <figure className={styles.sheet}>
             <figcaption>
-              <span className={styles.sheetTitle}>Ficha técnica de referência</span>
-              <span>Tinta em pó à base de poliéster</span>
+              <span className={styles.sheetTitle}>{services.tableTitle}</span>
+              <span>{services.physicalTitle}</span>
             </figcaption>
             <table>
-              <thead><tr><th scope="col">Propriedade</th><th scope="col">Valor de referência</th></tr></thead>
-              <tbody>{physicalProperties.map(([name, value]) => <tr key={name}><th scope="row">{name}</th><td>{value}</td></tr>)}</tbody>
+              <tbody>{services.physical.map(([name, value], index) => <tr key={`${name}-${index}`}><th scope="row">{name}</th><td>{value}</td></tr>)}</tbody>
             </table>
-            <p className={styles.sheetNote}>Valores publicados no site anterior como referência histórica (Catálogo Coraldur — Tintas em Pó). Não substituem o boletim técnico da tinta escolhida nem constituem garantia para uma peça ou ambiente específico.</p>
-            <Link className={styles.textLink} href="/solucoes/pintura-eletrostatica-a-po#ficha-tecnica">Ver resistência química e ensaios</Link>
+            <p className={styles.sheetNote}>{services.source}</p>
+            <Link className={styles.textLink} href="/servicos#ficha-tecnica">{home.more}</Link>
           </figure>
         </div>
       </section>
@@ -123,49 +105,32 @@ export default function HomePage() {
       <section className={styles.services} aria-labelledby="servicos">
         <div className="shell">
           <div className={styles.sectionHead}>
-            <h2 id="servicos">Serviços e aplicações</h2>
-            <p>{legacy.closing} Pintura eletrostática a pó com preparação de superfície, aplicação, cura e controle do acabamento.</p>
+            <h2 id="servicos">{services.materialTitle}</h2>
+            <p>{services.materialIntro}</p>
           </div>
           <div className={styles.serviceGrid}>
             <div className={styles.servicePhoto}><Image src="/gallery/17.webp" alt="Estrutura metálica de passarela" fill sizes="(max-width: 900px) 90vw, 40vw" /></div>
             <dl className={styles.index}>
-              {serviceApplications.map(({ title, pieces }) => <div key={title}><dt>{title}</dt><dd>{pieces}</dd></div>)}
+              {services.materials.map(([title, pieces]) => <div key={title}><dt>{title}</dt><dd>{pieces}</dd></div>)}
             </dl>
           </div>
-          <ul className={styles.benefits}>{[...legacy.advantages, ...benefits].slice(0, 4).map((benefit) => <li key={benefit}>{benefit}</li>)}</ul>
-          <Link className={styles.textLink} href="/solucoes/pintura-eletrostatica-a-po">Ver o serviço completo</Link>
-        </div>
-      </section>
-
-      <section className={styles.faq} aria-labelledby="perguntas">
-        <div className={`shell ${styles.faqGrid}`}>
-          <div>
-            <h2 id="perguntas">Perguntas frequentes</h2>
-            <p>Respostas diretas sobre resinas, dimensões, acabamentos e conservação da pintura.</p>
-          </div>
-          <div className={styles.faqList}>
-            {faq.map(({ question, answer }) => (
-              <details key={question}>
-                <summary>{question}</summary>
-                <p>{answer}</p>
-              </details>
-            ))}
-          </div>
+          <p className={styles.closingLine}>{services.closing}</p>
+          <Link className={styles.textLink} href="/servicos">{home.more}</Link>
         </div>
       </section>
 
       <section className={styles.quote} aria-labelledby="titulo-orcamento">
         <div className={`shell ${styles.quoteGrid}`}>
           <div>
-            <h2 id="titulo-orcamento">Solicite um orçamento</h2>
-            <p>{legacy.consult} Informe material, dimensões, quantidade, uso e prazo. Fotos e desenhos ajudam a equipe a entender a peça.</p>
-            <dl className={styles.contactList}>
-              <div><dt>E-mail para dúvidas, solicitações e orçamentos</dt><dd><a href={`mailto:${company.email}`}>{company.email}</a></dd></div>
-              <div><dt>Telefone</dt><dd><a href="tel:+552134487320">{company.phoneMain}</a></dd></div>
-              <div><dt>Endereço</dt><dd>{company.address}</dd></div>
-            </dl>
+            <h2 id="titulo-orcamento">{home.contactTitle}</h2>
+            <p>{contact.intro}</p>
+            <div className={styles.contactBlock}>
+              <strong>{home.locationTitle}</strong>
+              <p>{home.locationText}</p>
+              <a href={`mailto:${contact.email}`}>{contact.email}</a>
+            </div>
           </div>
-          <div className={styles.formSheet}><QuoteForm /></div>
+          <div className={styles.formSheet}><LegacyContactForm /></div>
         </div>
       </section>
     </>

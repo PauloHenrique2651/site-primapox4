@@ -9,7 +9,7 @@ export function PageHero({ eyebrow, title, copy, image }: { eyebrow: string; tit
       {image && <div className={styles.photo}><Image src={image} alt="" fill sizes="(max-width: 800px) 100vw, 45vw" priority /></div>}
       <div className={`shell ${styles.inner}`}>
         <nav className={styles.crumbs} aria-label="Você está em">
-          <Link href="/">Início</Link> <span aria-hidden="true">/</span> <span aria-current="page">{eyebrow.replace("Primapox / ", "")}</span>
+          <Link href="/">Home</Link> <span aria-hidden="true">/</span> <span aria-current="page">{eyebrow.replace("Primapox / ", "")}</span>
         </nav>
         <h1>{title}</h1>
         {copy && <p>{copy}</p>}
