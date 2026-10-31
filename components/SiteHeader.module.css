@@ -11,7 +11,7 @@
 
 .bar[data-scrolled="true"] { box-shadow: 0 8px 30px rgba(0, 0, 0, .5); }
 .barInner { display: grid; grid-template-columns: auto 1fr auto auto; align-items: center; gap: 1.5rem; min-height: var(--header-h); }
-.brand { padding: 6px 10px; background: #fff; border-radius: 2px; box-sizing: content-box; }
+.brand { padding: 0; background: none; border: 0; box-shadow: none; }
 .nav { display: flex; justify-content: flex-end; gap: clamp(.8rem, 1.6vw, 1.6rem); white-space: nowrap; }
 .nav a { padding-block: .6rem; color: #e6e6e6; font: 400 .9rem/1 var(--font-montserrat); transition: color 200ms ease; }
 .nav a:hover { color: #fff; }

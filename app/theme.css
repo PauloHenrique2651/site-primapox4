@@ -2,6 +2,7 @@
    leves (300–500), títulos grandes em peso regular, botões sólidos de raio 2px. O dourado da Prodec
    é substituído pelo vermelho Primapox; o azul da marca entra nos detalhes. */
 :root {
+  --footer-bg: #0a0a0a; --form-bg: #232323; --form-ink: #f1f1f1; --form-line: rgba(255,255,255,.12); --form-placeholder: #9a9a9a; --form-button: var(--red); --form-radius: 2px;
   --font-display: var(--font-montserrat);
   --font-body: var(--font-montserrat);
   --bg: #0f0f0f;

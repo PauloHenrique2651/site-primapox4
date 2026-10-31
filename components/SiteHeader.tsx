@@ -5,7 +5,6 @@ import { usePathname } from "next/navigation";
 import { BrandMark } from "@/components/BrandMark";
 import { useHeaderState } from "@/components/useHeaderState";
 import { navigation } from "@/data/site";
-import { home } from "@/data/primapox";
 import styles from "./SiteHeader.module.css";
 
 // Prodec-style header (reverse engineered): one dark bar, logo left, compact nav,
@@ -23,9 +22,8 @@ export function SiteHeader() {
             <Link key={item.href} href={item.href} aria-current={pathname === item.href ? "page" : undefined}>{item.label}</Link>
           ))}
         </nav>
-        <Link className={styles.cta} href="/contato">{home.contactTitle}</Link>
-        <button ref={toggle} className={styles.toggle} type="button" aria-expanded={open} aria-controls="menu-mobile" onClick={() => setOpen(!open)}>
-          Menu <span aria-hidden="true"><i /><i /><i /></span>
+        <button ref={toggle} className={styles.toggle} type="button" aria-expanded={open} aria-controls="menu-mobile" aria-label={open ? "Fechar menu" : "Abrir menu"} onClick={() => setOpen(!open)}>
+          <span aria-hidden="true"><i /><i /><i /></span>
         </button>
       </div>
       <div ref={menu} className={styles.menu} id="menu-mobile" hidden={!open}>

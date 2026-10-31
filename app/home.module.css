@@ -92,3 +92,13 @@
   .heroCaption { display: none; }
 }
 @media (max-width: 640px) { .icons ul, .cardGrid { grid-template-columns: 1fr; } .card { min-height: 360px; } }
+
+
+/* ---------- Home with only the legacy home content ---------- */
+.iconsTitle { margin: 0 0 1.25rem; color: #fff; font: 500 1rem/1 var(--font-montserrat); }
+.box { grid-template-columns: 1fr; }
+.locationGrid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(2rem, 5vw, 4rem); align-items: center; }
+.map { width: 100%; min-height: 340px; border: 0; border-radius: 2px; }
+.locationTitle { margin: 0 0 1rem; color: #fff; font: 400 clamp(1.8rem, 2.8vw, 2.4rem)/1.1 var(--font-montserrat); }
+.locationText { margin: 0 0 1rem; color: #c4c4c4; font-size: 1rem; line-height: 1.65; }
+@media (max-width: 1000px) { .locationGrid { grid-template-columns: 1fr; } }

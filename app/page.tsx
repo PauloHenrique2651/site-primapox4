@@ -2,23 +2,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { pageMetadata } from "@/data/seo";
 import { HeroBackgroundVideo } from "@/components/HeroBackgroundVideo";
-import { LegacyContactForm } from "@/components/LegacyContactForm";
-import { PhotoGallery } from "@/components/PhotoGallery";
-import { about, contact, galleryTitle, home, services } from "@/data/primapox";
+import { HomeContactForm } from "@/components/HomeContactForm";
+import { company } from "@/data/site";
+import { home } from "@/data/primapox";
 import styles from "./home.module.css";
 
-export const metadata = pageMetadata("/", "Primapox | Pintura eletrostática a pó no Rio de Janeiro", "Executamos pintura eletrostática com tinta em pó, ideais para: esquadrias, batentes, caixilhos, forros, divisórias, fachadas, telhas metálicas, coberturas, estruturas espaciais, etc.");
+export const metadata = pageMetadata("/", "Primapox", home.servicesText);
 
-// Section order reverse engineered from prodecolor.com.br; every visible text comes verbatim from data/primapox.ts.
-const [paintingFirst] = services.painting.split(" A tinta em pó tem");
-
-const cards = [
-  { title: services.pretreatmentTitle, text: services.pretreatment[1], href: "/servicos", photo: "/gallery/2.webp" },
-  { title: services.paintingTitle, text: paintingFirst, href: "/servicos", photo: "/gallery/31.webp" },
-  { title: services.cureTitle, text: services.after[0], href: "/servicos", photo: "/gallery/22.webp" },
-  { title: "Manutenção", text: "A pintura Poliéster deve ser limpa regularmente para manter suas propriedades decorativas.", href: "/manutencao", photo: "/gallery/26.webp" },
-];
-
+// Only the content of the legacy home page (index.php), in its order, styled after prodecolor.com.br.
 function Icon({ index }: { index: number }) {
   const paths = [
     <path key="a" d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" />,
@@ -31,108 +22,50 @@ function Icon({ index }: { index: number }) {
 export default function HomePage() {
   return (
     <>
-      <section className={styles.hero} aria-labelledby="titulo-principal">
+      <section className={styles.hero} aria-labelledby="nossos-servicos">
         <HeroBackgroundVideo src="/media/hero-prodec.webm" poster="/gallery/25.webp" className={styles.video} buttonClassName={styles.videoToggle} />
         <div className={`shell ${styles.heroInner}`}>
-          <h1 id="titulo-principal">{services.closing}</h1>
+          <h1 id="nossos-servicos">{home.servicesTitle}</h1>
           <p>{home.servicesText}</p>
-          <Link className={styles.solid} href="/servicos">{home.more}</Link>
         </div>
-        <p className={styles.heroCaption}>{home.servicesTitle}</p>
       </section>
 
-      <section className={styles.icons} aria-label={home.advantagesTitle}>
-        <ul className="shell">
-          {home.advantages.map((advantage, index) => <li key={advantage}><Icon index={index} /><h2>{advantage}</h2></li>)}
-        </ul>
-      </section>
-
-      <section className={styles.cards} aria-labelledby="servicos">
+      <section className={styles.icons} aria-labelledby="vantagens">
         <div className="shell">
-          <h2 id="servicos" className={styles.visuallyHidden}>{services.title}</h2>
-          <div className={styles.cardGrid}>
-            {cards.map((card) => (
-              <Link key={card.title} className={styles.card} href={card.href}>
-                <Image src={card.photo} alt="" fill sizes="(max-width: 700px) 92vw, (max-width: 1100px) 46vw, 24vw" />
-                <div className={styles.cardText}>
-                  <span>{services.title}</span>
-                  <h3>{card.title}</h3>
-                  <p>{card.text}</p>
-                  <b>{home.more}</b>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <p id="vantagens" className={styles.iconsTitle}>{home.advantagesTitle}</p>
+          <ul>{home.advantages.map((item, index) => <li key={item}><Icon index={index} /><h2>{item}</h2></li>)}</ul>
         </div>
       </section>
 
-      <section className={styles.highlight} aria-labelledby="slogan">
-        <Image src="/gallery/33.webp" alt="" fill sizes="100vw" />
-        <div className={`shell ${styles.highlightGrid}`}>
-          <div>
-            <p className={styles.boxed}>Primapox</p>
-            <h2 id="slogan">{services.sloganTitle}</h2>
-            <p>{services.sloganParagraphs[0]}</p>
-          </div>
-          <dl className={styles.features}>
-            {services.types.slice(0, 2).map(([name, text]) => <div key={name}><dt>{name}</dt><dd>{text}</dd></div>)}
-            <div><dt>{services.typesNote}</dt></div>
-          </dl>
-        </div>
-      </section>
-
-      <section className={styles.tradition} aria-labelledby="quem-somos">
+      <section className={styles.tradition} aria-labelledby="a-primapox">
         <div className={`shell ${styles.traditionGrid}`}>
           <div className={styles.collage}>
-            <div><Image src="/gallery/12.webp" alt="Letreiro da Primapox" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
-            <div><Image src="/gallery/11.webp" alt="Vista interna da área de produção" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
-            <div><Image src="/gallery/32.webp" alt="Vista da linha produtiva da Primapox" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
+            <div><Image src="/gallery/12.webp" alt="Primapox" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
+            <div><Image src="/gallery/11.webp" alt="" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
+            <div><Image src="/gallery/32.webp" alt="" fill sizes="(max-width: 900px) 46vw, 22vw" /></div>
           </div>
           <div>
-            <h2 id="quem-somos">{about.title}</h2>
+            <h2 id="a-primapox">{home.aboutTitle}</h2>
             <p>{home.aboutText}</p>
-            <p>{about.paragraphs[2]}</p>
-            <p>{about.paragraphs[3]}</p>
-            <Link className={styles.outline} href="/empresa">{home.more}</Link>
           </div>
-        </div>
-      </section>
-
-      <section className={styles.finishes} aria-labelledby="galeria">
-        <div className="shell">
-          <div className={styles.rowHead}>
-            <h2 id="galeria">{galleryTitle}</h2>
-            <Link href="/galeria">{home.more}</Link>
-          </div>
-          <PhotoGallery limit={8} />
         </div>
       </section>
 
       <section className={styles.contactBox} aria-labelledby="fale-conosco">
         <div className={`shell ${styles.box}`}>
-          <div>
-            <h2 id="fale-conosco">{home.contactTitle}</h2>
-            <p>{contact.intro}</p>
-            <p>{home.locationText}</p>
-            <a href={`mailto:${contact.email}`}>{contact.email}</a>
-          </div>
-          <LegacyContactForm />
+          <h2 id="fale-conosco">{home.contactTitle}</h2>
+          <HomeContactForm />
         </div>
       </section>
 
-      <section className={styles.faq} aria-labelledby="material">
-        <div className="shell">
-          <h2 id="material">{services.materialTitle}</h2>
-          <p>{services.materialIntro}</p>
-          <div className={styles.faqList}>
-            {services.materials.map(([name, text]) => (
-              <details key={name}>
-                <summary>{name}</summary>
-                <p>- {text}</p>
-              </details>
-            ))}
+      <section className={styles.finishes} aria-labelledby="localizacao">
+        <div className={`shell ${styles.locationGrid}`}>
+          <iframe className={styles.map} src={company.mapsEmbedUrl} title={home.locationTitle} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
+          <div>
+            <h2 id="localizacao" className={styles.locationTitle}>{home.locationTitle}</h2>
+            <p className={styles.locationText}>{home.locationText}</p>
+            <Link className={styles.outline} href="/contato">{home.more}</Link>
           </div>
-          <p className={styles.closing}>{services.closing}</p>
         </div>
       </section>
     </>
