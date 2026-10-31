@@ -1,19 +1,16 @@
 import type { Metadata, Viewport } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans, Source_Serif_4 } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import { StructuredData } from "@/components/StructuredData";
 import { siteUrl } from "@/data/seo";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ScrollReveal } from "@/components/ScrollReveal";
 import { ScrollTone } from "@/components/ScrollTone";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import "./globals.css";
 import "./responsive-refinements.css";
 import "./theme.css";
 
-const display = Source_Serif_4({ subsets: ["latin"], weight: ["400", "600", "700"], variable: "--font-display", display: "swap" });
-const body = IBM_Plex_Sans({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-body", display: "swap" });
-const data = IBM_Plex_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-data", display: "swap" });
+const montserrat = Montserrat({ subsets: ["latin"], weight: ["300", "400", "500", "600"], variable: "--font-montserrat", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -36,11 +33,11 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = {themeColor:"#0b1a4a"};
+export const viewport: Viewport = {themeColor:"#111111"};
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="pt-BR" data-scroll-behavior="smooth" className={`${display.variable} ${body.variable} ${data.variable}`}>
+    <html lang="pt-BR" data-scroll-behavior="smooth" className={montserrat.variable}>
       <body>
         <StructuredData />
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
@@ -49,7 +46,6 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
         <SiteFooter />
         <ScrollReveal />
         <ScrollTone />
-        <aside aria-label="Contato rápido"><WhatsAppButton /></aside>
       </body>
     </html>
   );
